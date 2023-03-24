@@ -7,7 +7,7 @@ output: github_document
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
+  comment = "",
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
@@ -44,6 +44,9 @@ Below is the list of curently available hooks:
 This hook is mainly intended at demoing the `{golem}` hooks system.
 It adds the "Old Faithful Geyser Data" app to your golem project.
 
+<details>
+<summary>Click here to see the content of `app_ui` and `app_server` from `geyser_hook`</summary>
+
 ```{r}
 pth <- tempfile(pattern = "geyser")
 old_wd <- getwd()
@@ -55,9 +58,6 @@ golem::create_golem(
 )
 ```
 
-
-<details>
-<summary>Click here to see the content of `app_ui` and `app_server`</summary>
 
 ```{r}
 cat(
