@@ -1,0 +1,156 @@
+---
+title: "flat_geyser.Rmd empty"
+output: html_document
+editor_options:
+  chunk_output_type: console
+---
+
+```{r development, include=FALSE}
+library(testthat)
+```
+
+```{r development-load}
+# Load already included functions if relevant
+pkgload::load_all(export_all = FALSE)
+```
+
+# geyser
+
+```{r function-geyser}
+#' geyser hook
+#'
+#' This hook creates an Old Faithful Geyser Data
+#' application. It is mainly inteded as a simple example of how to
+#' use the `project_hook` argument of `create_golem()`.
+#'
+#' @return Used for side effect
+#' @inheritParams golem::project_hook
+#' @export
+#'
+geyser_hook <- function(path, package_name, ...) {
+  withr::with_dir(path, {
+    geyser_hook_replace_in_ui()
+    geyser_hook_replace_in_server()
+  })
+}
+
+geyser_hook_replace_in_ui <- function() {
+  ui_line <- detect_ui_line()
+  ui_lines <- readLines("R/app_ui.R")
+  ui_lines[ui_line] <- '  # Application title
+  titlePanel("Old Faithful Geyser Data"),
+
+  # Sidebar with a slider input for number of bins
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput(
+        "bins",
+        "Number of bins:",
+        min = 1,
+        max = 50,
+        value = 30
+      )
+    ),
+
+    # Show a plot of the generated distribution
+    mainPanel(
+      plotOutput("distPlot")
+    )
+  )'
+  writeLines(ui_lines, "R/app_ui.R")
+  styler::style_file("R/app_ui.R")
+}
+
+geyser_hook_replace_in_server <- function() {
+  server_line <- detect_server_line()
+  server_lines <- readLines("R/app_server.R")
+  server_lines[server_line] <- '# Your application server logic
+  output$distPlot <- renderPlot({
+    # generate bins based on input$bins from ui.R
+    x <- faithful[, 2]
+    bins <- seq(min(x), max(x), length.out = input$bins + 1)
+
+    # draw the histogram with the specified number of bins
+    hist(x, breaks = bins, col = "darkgray", border = "white")
+  })'
+  writeLines(server_lines, "R/app_server.R")
+  styler::style_file("R/app_server.R")
+}
+```
+
+```{r examples-geyser}
+if (FALSE){
+  pth <- tempfile(pattern = "geyser")
+  golem::create_golem(pth, project_hook = geyser_hook)
+  readLines(file.path(pth, "R/app_ui.R"))
+  unlink(pth, recursive = TRUE)
+}
+```
+
+```{r tests-geyser}
+test_that("geyser_hook works", {
+  pth <- tempfile(pattern = "geyser")
+  old_wd <- getwd()
+  unlink(pth, recursive = TRUE)
+  golem::create_golem(
+    pth, project_hook = geyser_hook)
+  expect_true(
+    file.exists(
+      file.path(pth, "R/app_ui.R")
+    )
+  )
+  expect_true(
+    file.exists(
+      file.path(pth, "R/app_server.R")
+    )
+  )
+  expect_true(
+    grepl(
+      "Old Faithful Geyser Data",
+      paste(
+        readLines(
+          file.path(pth, "R/app_ui.R")
+        ),
+        collapse = ""
+      )
+    )
+  )
+  expect_true(
+    grepl(
+      "# Sidebar with a slider input for number of bins",
+      paste(
+        readLines(
+          file.path(pth, "R/app_ui.R")
+        ),
+        collapse = ""
+      )
+    )
+  )
+  expect_true(
+    grepl(
+      "output\\$distPlot <- renderPlot",
+      paste(
+        readLines(file.path(pth, "R/app_server.R")),
+        collapse = ""
+      )
+    )
+  )
+  expect_true(
+    grepl(
+      "histogram with the specified number of bins",
+      paste(
+        readLines(
+          file.path(pth, "R/app_server.R")), collapse = "")
+    )
+  )
+  setwd(old_wd)
+})
+```
+
+
+```{r development-inflate, eval=FALSE}
+# Run but keep eval=FALSE to avoid infinite loop
+# Execute in the console directly
+fusen::inflate(flat_file = "dev/flat_geyser.Rmd", vignette_name = NA)
+```
+

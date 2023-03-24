@@ -1,0 +1,71 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# ghooks
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of `{ghooks}` is to provide __GO__lem __HO__oks for __ST__andard `{shiny}` structures.
+
+## Installation
+
+You can install the development version of `{ghooks}` like so:
+
+``` r
+pak::pak("thinkr-open/ghooks")
+```
+
+## `{golem}` hooks
+
+`{golem}` hooks are functions that are called by `{golem}` at specific moments of the app lifecycle.
+They are used to add custom code to the app, notably when creating the app with `create_golem()`.
+
+You can find more info about `{golem}` hooks on [`{golem}` documentation](https://thinkr-open.github.io/golem/articles/f_extending_golem.html).
+
+The hooks can be called with `golem::create_golem(project_hook = )`, when creating a new golem project via the RStudio widget, as show on the screenshot in the [Extending `{golem}`](https://thinkr-open.github.io/golem/articles/f_extending_golem.html#defining-your-own-project_hook) Vignette.
+
+Below is the list of curently available hooks:
+
+### `geyser_hook`
+
+This hook is mainly intended at demoing the `{golem}` hooks system.
+It adds the "Old Faithful Geyser Data" app to your golem project.
+
+## About
+
+You're reading the doc about version : `r pkgload::pkg_version()`
+
+This README has been compiled on:
+
+```{r}
+Sys.time()
+```
+
+Here are the test & coverage results :
+
+```{r}
+devtools::check(quiet = TRUE)
+```
+
+```{r echo = FALSE}
+unloadNamespace("ghooks")
+```
+
+```{r}
+covr::package_coverage()
+```
+
+

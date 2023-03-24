@@ -1,0 +1,17 @@
+Package: ghooks
+Title: 'Golem' Hooks for Standard 'Shiny' Apps
+Version: 0.0.0.9000
+Authors@R:
+    person("Colin", "Fay", , "contact@colinfay.me", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-7343-1846"))
+Description: What the package does (one paragraph).
+License: MIT + file LICENSE
+Imports:
+    styler (>= 1.8.1),
+    withr (>= 2.5.0)
+Suggests:
+    golem (>= 0.4.0),
+    testthat (>= 3.1.7)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3

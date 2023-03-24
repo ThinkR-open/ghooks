@@ -1,0 +1,96 @@
+---
+title: "flat_utils.Rmd empty"
+output: html_document
+editor_options:
+  chunk_output_type: console
+---
+
+```{r development, include=FALSE}
+library(testthat)
+```
+
+```{r development-load}
+# Load already included functions if relevant
+pkgload::load_all(export_all = FALSE)
+```
+
+# utils
+
+```{r function-utils}
+#' utils for the hooks
+#'
+#' @return line for the h1() in the ui
+#' @noRd
+detect_ui_line <- function(
+  path = "R/app_ui.R"
+) {
+  grep(
+    "h1\\(",
+    readLines(
+      path
+    )
+  )
+}
+#' @noRd
+detect_server_line <- function(
+ path = "R/app_server.R"
+) {
+  grep(
+    "Your application server logic",
+    readLines(
+      path
+    )
+  )
+}
+
+```
+
+```{r examples-utils}
+detect_ui_line(
+  system.file(
+    "shinyexample/R/app_ui.R",
+    package = "golem"
+  )
+)
+detect_server_line(
+    system.file(
+      "shinyexample/R/app_server.R",
+      package = "golem"
+    )
+)
+```
+
+```{r tests-utils}
+test_that("detect_ui_line works", {
+  expect_true(
+    inherits(
+      detect_ui_line(
+        system.file(
+          "shinyexample/R/app_ui.R",
+          package = "golem"
+        )
+      ),
+      "integer"
+    )
+  )
+  expect_true(
+    inherits(
+      detect_server_line(
+        system.file(
+          "shinyexample/R/app_server.R",
+          package = "golem"
+        )
+      ),
+      "integer"
+    )
+  )
+})
+```
+
+
+```{r development-inflate, eval=FALSE}
+# Run but keep eval=FALSE to avoid infinite loop
+# Execute in the console directly
+fusen::inflate(flat_file = "dev/flat_utils.Rmd", vignette_name = NA)
+```
+
