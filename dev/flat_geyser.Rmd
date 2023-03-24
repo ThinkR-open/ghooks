@@ -93,7 +93,10 @@ test_that("geyser_hook works", {
   old_wd <- getwd()
   unlink(pth, recursive = TRUE)
   golem::create_golem(
-    pth, project_hook = geyser_hook)
+    pth,
+    project_hook = geyser_hook,
+    open = FALSE
+  )
   expect_true(
     file.exists(
       file.path(pth, "R/app_ui.R")

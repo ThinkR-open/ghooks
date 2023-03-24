@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of `{ghooks}` is to provide __GO__lem __HO__oks for __ST__andard `{shiny}` structures.
+The goal of `{ghooks}` is to provide `{ghooks}` hooks for standard `{shiny}` apps.
 
 ## Installation
 
@@ -43,6 +43,41 @@ Below is the list of curently available hooks:
 
 This hook is mainly intended at demoing the `{golem}` hooks system.
 It adds the "Old Faithful Geyser Data" app to your golem project.
+
+```{r}
+pth <- tempfile(pattern = "geyser")
+old_wd <- getwd()
+unlink(pth, recursive = TRUE)
+golem::create_golem(
+  pth,
+  project_hook = ghooks::geyser_hook,
+  open = FALSE
+)
+```
+
+
+<details>
+<summary>Click here to see the content of `app_ui` and `app_server`</summary>
+
+```{r}
+cat(
+  readLines(
+    file.path(pth, "R", "app_ui.R")
+  ),
+  sep = "\n"
+)
+```
+
+```{r}
+cat(
+  readLines(
+    file.path(pth, "R", "app_server.R")
+  ),
+  sep = "\n"
+)
+```
+
+</details>
 
 ## About
 
