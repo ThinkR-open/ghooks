@@ -2,3 +2,5 @@
 ^dev$
 ^\.here$
 ^LICENSE\.md$
+^\.github$
+^README\.html$

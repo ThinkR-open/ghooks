@@ -4,6 +4,10 @@
 # ghooks
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/ThinkR-open/ghooks/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ThinkR-open/ghooks/actions/workflows/R-CMD-check.yaml)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
 The goal of `{ghooks}` is to provide `{ghooks}` hooks for standard
@@ -15,6 +19,35 @@ You can install the development version of `{ghooks}` like so:
 
 ``` r
 pak::pak("thinkr-open/ghooks")
+```
+
+## About
+
+You’re reading the doc about version : 0.0.0.9000
+
+This README has been compiled on the
+
+``` r
+Sys.time()
+[1] "2023-03-27 13:07:03 CEST"
+```
+
+Here are the test & coverage results :
+
+``` r
+devtools::check(quiet = TRUE)
+ℹ Loading ghooks
+── R CMD check results ────────────────────────────────── ghooks 0.0.0.9000 ────
+Duration: 7.1s
+
+0 errors ✔ | 0 warnings ✔ | 0 notes ✔
+```
+
+``` r
+covr::package_coverage()
+ghooks Coverage: 100.00%
+R/detect_ui_line.R: 100.00%
+R/geyser_hook.R: 100.00%
 ```
 
 ## `{golem}` hooks
@@ -57,8 +90,8 @@ golem::create_golem(
 ── Checking package name ───────────────────────────────────────────────────────
 ✔ Valid package name
 ── Creating dir ────────────────────────────────────────────────────────────────
-✔ Creating '/var/folders/9w/zdlv83ws6csdjnfc5x819gtr0000gn/T/RtmplMUEcL/geyser155337cf5277a/'
-✔ Setting active project to '/private/var/folders/9w/zdlv83ws6csdjnfc5x819gtr0000gn/T/RtmplMUEcL/geyser155337cf5277a'
+✔ Creating '/var/folders/9w/zdlv83ws6csdjnfc5x819gtr0000gn/T/RtmpMxqJJS/geyserd84144e998b8/'
+✔ Setting active project to '/private/var/folders/9w/zdlv83ws6csdjnfc5x819gtr0000gn/T/RtmpMxqJJS/geyserd84144e998b8'
 ✔ Creating 'R/'
 ✔ Writing a sentinel file '.here'
 • Build robust paths within your project via `here::here()`
@@ -88,9 +121,9 @@ Status  Count   Legend
 Please review the changes carefully!
 ✔ All set
 ✔ Setting active project to
-'/private/var/folders/9w/zdlv83ws6csdjnfc5x819gtr0000gn/T/RtmplMUEcL/geyser155337cf5277a'
+'/private/var/folders/9w/zdlv83ws6csdjnfc5x819gtr0000gn/T/RtmpMxqJJS/geyserd84144e998b8'
 ── Done ────────────────────────────────────────────────────────────────────────
-A new golem named geyser155337cf5277a was created at /var/folders/9w/zdlv83ws6csdjnfc5x819gtr0000gn/T//RtmplMUEcL/geyser155337cf5277a .
+A new golem named geyserd84144e998b8 was created at /var/folders/9w/zdlv83ws6csdjnfc5x819gtr0000gn/T//RtmpMxqJJS/geyserd84144e998b8 .
 To continue working on your app, start editing the 01_start.R file.
 ```
 
@@ -155,7 +188,7 @@ golem_add_external_resources <- function() {
     favicon(),
     bundle_resources(
       path = app_sys("app/www"),
-      app_title = "geyser155337cf5277a"
+      app_title = "geyserd84144e998b8"
     )
     # Add here other external resources
     # for example, you can add shinyalert::useShinyalert()
@@ -199,7 +232,7 @@ This README has been compiled on:
 
 ``` r
 Sys.time()
-[1] "2023-03-24 21:02:48 CET"
+[1] "2023-03-27 13:07:14 CEST"
 ```
 
 Here are the test & coverage results :
@@ -208,13 +241,9 @@ Here are the test & coverage results :
 devtools::check(quiet = TRUE)
 ℹ Loading ghooks
 ── R CMD check results ────────────────────────────────── ghooks 0.0.0.9000 ────
-Duration: 7.3s
+Duration: 7.6s
 
-❯ checking top-level files ... NOTE
-  Non-standard file/directory found at top level:
-    ‘README.html’
-
-0 errors ✔ | 0 warnings ✔ | 1 note ✖
+0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```
 
 ``` r
