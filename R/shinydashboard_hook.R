@@ -17,7 +17,6 @@
 #'   unlink(pth, recursive = TRUE)
 #' }
 shinydashboard_hook <- function(path, package_name, ...) {
-  browser()
   withr::with_dir(path, {
     usethis::use_package("shinydashboard")
     shinydashboard_hook_replace_in_ui()
