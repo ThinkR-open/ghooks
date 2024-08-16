@@ -25,7 +25,7 @@ shinydashboard_hook <- function(path, package_name, ...) {
 }
 
 shinydashboard_hook_replace_in_ui <- function() {
-  ui_line <- detect_ui_line()
+  ui_line <- detect_ui_line() + 2
   ui_lines <- readLines("R/app_ui.R")
   ui_lines[ui_line] <- '
      shinydashboard::dashboardPage(
