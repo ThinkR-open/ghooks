@@ -1,22 +1,47 @@
 test_that("geyser_hook works", {
-
   pth <- tempfile(pattern = "geyser")
-  old_wd <- getwd()
-  unlink(pth, recursive = TRUE)
-  golem::create_golem(
-    pth,
-    project_hook = geyser_hook
-  )
-  expect_true(
-    file.exists(
-      file.path(pth, "R/app_ui.R")
+  dir.create(pth)
+  on.exit(
+    unlink(
+      pth,
+      recursive = TRUE,
+      force = TRUE
     )
   )
-  expect_true(
-    file.exists(
-      file.path(pth, "R/app_server.R")
+  ui <- system.file(
+    "shinyexample/R/app_ui.R",
+    package = "golem"
+  )
+  server <- system.file(
+    "shinyexample/R/app_server.R",
+    package = "golem"
+  )
+  dir.create(
+    file.path(
+      pth,
+      "R"
     )
   )
+  file.copy(
+    ui,
+    file.path(
+      pth,
+      "R"
+    )
+  )
+  file.copy(
+    server,
+    file.path(
+      pth,
+      "R/app_server.R"
+    )
+  )
+  withr::with_options(
+    c("styler.quiet" = TRUE),{
+      geyser_hook(pth, "shinyexample")
+    }
+  )
+
   expect_true(
     grepl(
       "Old Faithful Geyser Data",
@@ -59,5 +84,4 @@ test_that("geyser_hook works", {
       )
     )
   )
-  setwd(old_wd)
 })
