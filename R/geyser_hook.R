@@ -24,7 +24,7 @@ geyser_hook <- function(path, package_name, ...) {
 }
 
 geyser_hook_replace_in_ui <- function() {
-  ui_line <- detect_ui_line()
+  ui_line <- detect_ui_line() + 2
   ui_lines <- readLines("R/app_ui.R")
   ui_lines[ui_line] <- '  # Application title
   titlePanel("Old Faithful Geyser Data"),

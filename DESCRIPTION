@@ -10,7 +10,7 @@ Imports:
     styler (>= 1.8.1),
     withr (>= 2.5.0)
 Suggests:
-    golem (>= 0.4.0),
+    golem (>= 0.5.0),
     testthat (>= 3.1.7)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
